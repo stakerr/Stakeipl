@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stake Ratio Calculator by 207</title>
     <style>
         body {
@@ -23,12 +23,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             max-width: 500px;
             width: 100%;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
         }
 
         .logo {
@@ -39,7 +33,6 @@
         .logo img {
             max-width: 100px;
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
@@ -67,13 +60,7 @@
             border: 2px solid #2575fc;
             border-radius: 10px;
             font-size: 16px;
-            transition: all 0.3s ease;
             text-align: center;
-        }
-
-        input:focus {
-            border-color: #6a11cb;
-            box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
         }
 
         button {
@@ -85,9 +72,8 @@
             font-size: 16px;
             cursor: pointer;
             width: 80%;
-            transition: transform 0.2s ease;
-            display: block;
             margin: 0 auto;
+            display: block;
         }
 
         button:hover {
@@ -100,13 +86,7 @@
             background: #f8f9fa;
             border-radius: 10px;
             display: none;
-            animation: fadeIn 0.5s ease;
             text-align: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .result-item {
@@ -114,32 +94,18 @@
             padding: 15px;
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
         .loss {
             color: #e74c3c;
             font-weight: bold;
         }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-            
-            input, button {
-                padding: 12px;
-                width: 90%;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Logo -->
         <div class="logo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR6GW5yWnT7Jx1zZ5TVx_Mcv9Cxqo-BIFEWw&s" alt="Logo">
         </div>
@@ -190,23 +156,18 @@
                 return;
             }
 
-            // Determine highest and lowest ratios
-            const highestRatio = Math.max(ratioA, ratioB);
-            const lowestRatio = Math.min(ratioA, ratioB);
-
-            // Calculate final loss
-            const loss = (totalAmount / highestRatio) - (totalAmount / lowestRatio);
-
             // Calculate bets
             const betA = totalAmount / ratioA;
             const betB = totalAmount / ratioB;
+
+            // Calculate loss using the new formula (considering Team A)
+            const loss = (betA * ratioA) - betA - betB;
 
             // Display results
             document.getElementById('betA').textContent = `₹${betA.toFixed(2)}`;
             document.getElementById('betB').textContent = `₹${betB.toFixed(2)}`;
             document.getElementById('loss').textContent = `₹${Math.abs(loss).toFixed(2)} ❌`;
 
-            // Show results with animation
             document.getElementById('results').style.display = 'block';
         }
     </script>
